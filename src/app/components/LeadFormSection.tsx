@@ -1,6 +1,7 @@
 import { useForm } from 'react-hook-form';
 import { Shield, CircleCheck } from 'lucide-react';
 import { useState } from 'react';
+import { trackEvent } from './Analytics';
 
 interface FormData {
   name: string;
@@ -42,12 +43,26 @@ export function LeadFormSection() {
         }),
       });
       
+      // تتبع التحويل في جميع المنصات
+      trackEvent.all('Lead', {
+        name: data.name,
+        phone: data.phone,
+        projectType: data.projectType,
+        value: 1,
+        currency: 'EGP'
+      });
+      
       setIsSubmitted(true);
       reset();
       setTimeout(() => setIsSubmitted(false), 5000);
     } catch (error) {
       console.error('Error:', error);
       setErrorMessage('حدث خطأ في الإرسال. يرجى المحاولة مرة أخرى.');
+      
+      // تتبع الخطأ
+      trackEvent.all('FormError', {
+        error: 'submission_failed'
+      });
     } finally {
       setIsSubmitting(false);
     }

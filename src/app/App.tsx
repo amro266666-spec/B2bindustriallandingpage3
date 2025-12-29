@@ -9,21 +9,57 @@ import { ExperienceSection } from './components/ExperienceSection';
 import { LeadFormSection } from './components/LeadFormSection';
 import { EquipmentSection } from './components/EquipmentSection';
 import { FloatingCallButton } from './components/FloatingCallButton';
+import { Analytics } from './components/Analytics';
+import { AnimatedSection } from './components/AnimatedSection';
 import { Facebook, Instagram, Linkedin } from 'lucide-react';
 
 export default function App() {
   return (
     <div className="min-h-screen" style={{ fontFamily: 'Cairo, sans-serif' }} dir="rtl" lang="ar">
+      {/* Analytics - استبدل الـ IDs بالقيم الحقيقية */}
+      <Analytics 
+        gtmId="GTM-XXXXXXX"
+        fbPixelId="YOUR_PIXEL_ID"
+        clarityId="YOUR_CLARITY_ID"
+      />
+      
       <HeroSection />
-      <PainPointsSection />
-      <SolutionsSection />
-      <WhyChooseUsSection />
-      <IndustriesSection />
-      <FAQSection />
-      <ProcessSection />
-      <ExperienceSection />
-      <LeadFormSection />
-      <EquipmentSection />
+      
+      <AnimatedSection direction="up" duration={0.8}>
+        <PainPointsSection />
+      </AnimatedSection>
+      
+      <AnimatedSection direction="left" duration={0.9}>
+        <SolutionsSection />
+      </AnimatedSection>
+      
+      <AnimatedSection direction="scale" duration={0.8}>
+        <WhyChooseUsSection />
+      </AnimatedSection>
+      
+      <AnimatedSection direction="right" duration={0.9}>
+        <IndustriesSection />
+      </AnimatedSection>
+      
+      <AnimatedSection direction="up" duration={0.8}>
+        <FAQSection />
+      </AnimatedSection>
+      
+      <AnimatedSection direction="fade" duration={1}>
+        <ProcessSection />
+      </AnimatedSection>
+      
+      <AnimatedSection direction="scale" duration={0.8}>
+        <ExperienceSection />
+      </AnimatedSection>
+      
+      <AnimatedSection direction="up" duration={0.9}>
+        <LeadFormSection />
+      </AnimatedSection>
+      
+      <AnimatedSection direction="left" duration={0.8}>
+        <EquipmentSection />
+      </AnimatedSection>
       
       {/* Floating Call Button */}
       <FloatingCallButton />

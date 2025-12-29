@@ -1,4 +1,5 @@
 import { ImageWithFallback } from './figma/ImageWithFallback';
+import { StaggeredChildren, StaggeredItem, ZoomIn } from './AnimatedSection';
 
 export function EquipmentSection() {
   const equipment = [
@@ -54,40 +55,45 @@ export function EquipmentSection() {
   return (
     <section className="py-16 sm:py-24 bg-white">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        <h2 className="text-3xl sm:text-4xl text-center mb-4 text-[#0B1C2D]" style={{ fontWeight: 700 }}>
-          بعض المكن والمعدات المتوفرة
-        </h2>
+        <ZoomIn>
+          <h2 className="text-3xl sm:text-4xl text-center mb-4 text-[#0B1C2D]" style={{ fontWeight: 700 }}>
+            بعض المكن والمعدات المتوفرة
+          </h2>
+        </ZoomIn>
         <p className="text-center text-[#2F2F2F] mb-12 max-w-2xl mx-auto">
           نمتلك أحدث المعدات والتقنيات لتلبية جميع احتياجاتك المعدنية
         </p>
 
         {/* Equipment Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 max-w-7xl mx-auto mb-12">
-          {equipment.map((item, index) => (
-            <div
-              key={index}
-              className="bg-white border border-gray-200 rounded-lg overflow-hidden shadow-md hover:shadow-xl transition-all group"
-            >
-              <div className="relative h-48 overflow-hidden">
-                <ImageWithFallback
-                  src={item.image}
-                  alt={item.name}
-                  className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
-                <h3
-                  className="absolute bottom-3 right-3 text-white text-xl"
-                  style={{ fontWeight: 700 }}
+        <StaggeredChildren>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 max-w-7xl mx-auto mb-12">
+            {equipment.map((item, index) => (
+              <StaggeredItem key={index}>
+                <div
+                  className="bg-white border border-gray-200 rounded-lg overflow-hidden shadow-md hover:shadow-xl transition-all group"
                 >
-                  {item.name}
-                </h3>
-              </div>
-              <div className="p-4">
-                <p className="text-[#2F2F2F] text-sm text-right">{item.description}</p>
-              </div>
-            </div>
-          ))}
-        </div>
+                  <div className="relative h-48 overflow-hidden">
+                    <ImageWithFallback
+                      src={item.image}
+                      alt={item.name}
+                      className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+                    <h3
+                      className="absolute bottom-3 right-3 text-white text-xl"
+                      style={{ fontWeight: 700 }}
+                    >
+                      {item.name}
+                    </h3>
+                  </div>
+                  <div className="p-4">
+                    <p className="text-[#2F2F2F] text-sm text-right">{item.description}</p>
+                  </div>
+                </div>
+              </StaggeredItem>
+            ))}
+          </div>
+        </StaggeredChildren>
 
         {/* CTA Button */}
         <div className="text-center">

@@ -1,7 +1,15 @@
 import { Phone, FileText } from 'lucide-react';
+import { trackEvent } from './Analytics';
 
 export function HeroSection() {
   const scrollToForm = () => {
+    // تتبع النقر على زر CTA
+    trackEvent.all('CTAClicked', {
+      section: 'hero',
+      action: 'get_quote',
+      button_text: 'اطلب عرض سعر الآن'
+    });
+    
     document.getElementById('lead-form')?.scrollIntoView({ behavior: 'smooth' });
   };
 

@@ -1,4 +1,5 @@
 import { Settings, Wrench, Zap, Package } from 'lucide-react';
+import { StaggeredChildren, StaggeredItem } from './AnimatedSection';
 
 export function SolutionsSection() {
   const solutions = [
@@ -34,30 +35,31 @@ export function SolutionsSection() {
         <h2 className="text-3xl sm:text-4xl text-center mb-12 text-[#0B1C2D]" style={{ fontWeight: 700 }}>
           حلولنا الصناعية
         </h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-6xl mx-auto">
-          {solutions.map((solution, index) => (
-            <div
-              key={index}
-              className="group relative overflow-hidden rounded-lg shadow-lg hover:shadow-2xl transition-all"
-            >
-              <div className="relative h-64">
-                <img
-                  src={solution.image}
-                  alt={solution.title}
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-[#0B1C2D]/90 to-[#0B1C2D]/40"></div>
-              </div>
-              <div className="absolute bottom-0 right-0 left-0 p-6 text-right">
-                <solution.icon className="w-10 h-10 mb-3 text-[#FF8C00] mr-auto" strokeWidth={1.5} />
-                <h3 className="text-white mb-2" style={{ fontWeight: 700 }}>
-                  {solution.title}
-                </h3>
-                <p className="text-white/80 text-sm">{solution.description}</p>
-              </div>
-            </div>
-          ))}
-        </div>
+        <StaggeredChildren staggerDelay={0.2}>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-6xl mx-auto">
+            {solutions.map((solution, index) => (
+              <StaggeredItem key={index}>
+                <div className="group relative overflow-hidden rounded-lg shadow-lg hover:shadow-2xl transition-all">
+                  <div className="relative h-64">
+                    <img
+                      src={solution.image}
+                      alt={solution.title}
+                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-[#0B1C2D]/90 to-[#0B1C2D]/40"></div>
+                  </div>
+                  <div className="absolute bottom-0 right-0 left-0 p-6 text-right">
+                    <solution.icon className="w-10 h-10 mb-3 text-[#FF8C00] mr-auto" strokeWidth={1.5} />
+                    <h3 className="text-white mb-2" style={{ fontWeight: 700 }}>
+                      {solution.title}
+                    </h3>
+                    <p className="text-white/80 text-sm">{solution.description}</p>
+                  </div>
+                </div>
+              </StaggeredItem>
+            ))}
+          </div>
+        </StaggeredChildren>
       </div>
     </section>
   );

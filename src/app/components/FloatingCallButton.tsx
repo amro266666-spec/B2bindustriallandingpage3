@@ -1,19 +1,23 @@
 import { Phone } from 'lucide-react';
+import { trackEvent } from './Analytics';
 
 export function FloatingCallButton() {
-  const phoneNumber = '01551410539';
-
-  const handleCall = () => {
-    window.location.href = `tel:${phoneNumber}`;
+  const handleCallClick = () => {
+    // تتبع النقر على زر الاتصال
+    trackEvent.all('PhoneCallClicked', {
+      button_location: 'floating_button',
+      phone_number: '01551410539'
+    });
   };
 
   return (
-    <button
-      onClick={handleCall}
-      className="fixed bottom-24 left-6 bg-[#FF8C00] hover:bg-[#FF8C00]/90 text-white rounded-full p-4 shadow-2xl transition-all hover:scale-110 z-50 animate-pulse hover:animate-none"
+    <a
+      href="tel:01551410539"
+      onClick={handleCallClick}
+      className="fixed bottom-6 left-6 bg-[#FF8C00] hover:bg-[#FF8C00]/90 text-white p-4 rounded-full shadow-lg hover:shadow-xl transition-all z-50 flex items-center justify-center group"
       aria-label="اتصل بنا"
     >
-      <Phone className="w-6 h-6" />
-    </button>
+      <Phone className="w-6 h-6 group-hover:animate-pulse" />
+    </a>
   );
 }
