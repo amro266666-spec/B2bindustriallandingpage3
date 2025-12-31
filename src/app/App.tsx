@@ -19,7 +19,7 @@ export default function App() {
       {/* Analytics - استبدل الـ IDs بالقيم الحقيقية */}
       <Analytics 
         gtmId="GTM-MZ9HSPC6"
-        fbPixelId="YOUR_PIXEL_ID"
+        fbPixelId="1309070321027945"
         clarityId="YOUR_CLARITY_ID"
       />
       
