@@ -20,7 +20,13 @@ export default function App() {
       <Analytics 
         gtmId="GTM-MZ9HSPC6"
         fbPixelId="1309070321027945"
-        clarityId="YOUR_CLARITY_ID"
+        clarityId="<script type="text/javascript">
+    (function(c,l,a,r,i,t,y){
+        c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+        t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+        y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+    })(window, document, "clarity", "script", "uu49c2ijxd");
+</script>"
       />
       
       <HeroSection />
