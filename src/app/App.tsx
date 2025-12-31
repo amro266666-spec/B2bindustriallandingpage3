@@ -18,7 +18,7 @@ export default function App() {
     <div className="min-h-screen" style={{ fontFamily: 'Cairo, sans-serif' }} dir="rtl" lang="ar">
       {/* Analytics - استبدل الـ IDs بالقيم الحقيقية */}
       <Analytics 
-        gtmId="GTM-XXXXXXX"
+        gtmId="GTM-MZ9HSPC6"
         fbPixelId="YOUR_PIXEL_ID"
         clarityId="YOUR_CLARITY_ID"
       />
