@@ -11,22 +11,47 @@ import { EquipmentSection } from './components/EquipmentSection';
 import { FloatingCallButton } from './components/FloatingCallButton';
 import { Analytics } from './components/Analytics';
 import { AnimatedSection } from './components/AnimatedSection';
+import { ThankYouPage } from './components/ThankYouPage';
 import { Facebook, Instagram, Linkedin } from 'lucide-react';
+import { useState } from 'react';
 
 export default function App() {
+  const [showThankYouPage, setShowThankYouPage] = useState(false);
+
+  const handleFormSubmit = () => {
+    setShowThankYouPage(true);
+    // Scroll to top
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
+  const handleBackToHome = () => {
+    setShowThankYouPage(false);
+    // Scroll to top
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
+  // Show Thank You Page
+  if (showThankYouPage) {
+    return (
+      <div className="min-h-screen" style={{ fontFamily: 'Cairo, sans-serif' }} dir="rtl" lang="ar">
+        <Analytics 
+          gtmId="GTM-XXXXXXX"
+          fbPixelId="YOUR_PIXEL_ID"
+          clarityId="YOUR_CLARITY_ID"
+        />
+        <ThankYouPage onBackToHome={handleBackToHome} />
+      </div>
+    );
+  }
+
+  // Show Main Landing Page
   return (
     <div className="min-h-screen" style={{ fontFamily: 'Cairo, sans-serif' }} dir="rtl" lang="ar">
       {/* Analytics - استبدل الـ IDs بالقيم الحقيقية */}
       <Analytics 
-        gtmId="GTM-MZ9HSPC6"
-        fbPixelId="1309070321027945"
-        clarityId="<script type="text/javascript">
-    (function(c,l,a,r,i,t,y){
-        c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
-        t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
-        y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
-    })(window, document, "clarity", "script", "uu49c2ijxd");
-</script>"
+        gtmId="GTM-XXXXXXX"
+        fbPixelId="YOUR_PIXEL_ID"
+        clarityId="YOUR_CLARITY_ID"
       />
       
       <HeroSection />
@@ -60,7 +85,7 @@ export default function App() {
       </AnimatedSection>
       
       <AnimatedSection direction="up" duration={0.9}>
-        <LeadFormSection />
+        <LeadFormSection onFormSubmit={handleFormSubmit} />
       </AnimatedSection>
       
       <AnimatedSection direction="left" duration={0.8}>
