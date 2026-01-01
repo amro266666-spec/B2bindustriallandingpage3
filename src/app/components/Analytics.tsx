@@ -29,7 +29,7 @@ export function Analytics({ gtmId, fbPixelId, clarityId }: AnalyticsProps) {
     }
 
     // Facebook Pixel
-    if (fbPixelId && fbPixelId !== 'YOUR_PIXEL_ID') {
+    if (fbPixelId && fbPixelId !== '1309070321027945') {
       // @ts-ignore
       !function(f,b,e,v,n,t,s)
       {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
