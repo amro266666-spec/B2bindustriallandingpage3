@@ -9,7 +9,7 @@ interface AnalyticsProps {
 export function Analytics({ gtmId, fbPixelId, clarityId }: AnalyticsProps) {
   useEffect(() => {
     // Google Tag Manager
-    if (gtmId && gtmId !== 'GTM-XXXXXXX') {
+    if (gtmId && gtmId !== 'GTM-MZ9HSPC6') {
       const gtmScript = document.createElement('script');
       gtmScript.innerHTML = `
         (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
@@ -59,16 +59,13 @@ export function Analytics({ gtmId, fbPixelId, clarityId }: AnalyticsProps) {
     }
 
     // Microsoft Clarity
-    if (clarityId && clarityId !== 'YOUR_CLARITY_ID') {
-      const clarityScript = document.createElement('script');
-      clarityScript.type = 'text/javascript';
-      clarityScript.innerHTML = `
-        (function(c,l,a,r,i,t,y){
-          c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
-          t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
-          y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
-        })(window, document, "clarity", "script", "${clarityId}");
-      `;
+      `;<script type="text/javascript">
+    (function(c,l,a,r,i,t,y){
+        c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+        t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+        y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+    })(window, document, "clarity", "script", "uu49c2ijxd");
+</script>
       document.head.appendChild(clarityScript);
 
       console.log('✅ Microsoft Clarity loaded:', clarityId);
