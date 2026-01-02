@@ -1,11 +1,13 @@
 import { CheckCircle, Home, Phone, Mail } from 'lucide-react';
 import { AnimatedSection, ZoomIn, SlideInFade } from './AnimatedSection';
+import { useNavigate } from 'react-router-dom';
 
 interface ThankYouPageProps {
-  onBackToHome: () => void;
+    onBackToHome: () => void;
 }
 
 export function ThankYouPage({ onBackToHome }: ThankYouPageProps) {
+    const navigate = useNavigate(); 
   return (
     <div className="min-h-screen bg-gradient-to-br from-[#0B1C2D] via-[#0B1C2D] to-[#2F2F2F] flex items-center justify-center px-4 py-16">
       <div className="max-w-2xl w-full">
@@ -82,7 +84,7 @@ export function ThankYouPage({ onBackToHome }: ThankYouPageProps) {
             {/* Back to Home Button */}
             <ZoomIn delay={0.7}>
               <button
-                onClick={onBackToHome}
+                onClick={() => navigate("/")}
                 className="inline-flex items-center justify-center gap-3 bg-[#FF8C00] hover:bg-[#FF8C00]/90 text-white px-8 py-4 rounded-lg transition-all shadow-lg hover:shadow-xl text-lg group"
                 style={{ fontWeight: 600 }}
               >
@@ -111,7 +113,7 @@ export function ThankYouPage({ onBackToHome }: ThankYouPageProps) {
             </div>
           </SlideInFade>
 
-          <SlideInFade direction="up" delay={0.9}>
+          <SlideInFade direction="left" delay={0.9}>
             <div className="bg-white/10 backdrop-blur-sm rounded-lg p-4 text-center border border-white/20">
               <div className="text-[#FF8C00] mb-2" style={{ fontWeight: 700 }}>
                 🎯 دقة في العمل

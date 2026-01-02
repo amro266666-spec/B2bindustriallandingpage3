@@ -9,7 +9,7 @@ interface AnalyticsProps {
 export function Analytics({ gtmId, fbPixelId, clarityId }: AnalyticsProps) {
   useEffect(() => {
     // Google Tag Manager
-    if (gtmId && gtmId !== 'GTM-MZ9HSPC6') {
+    if (gtmId && gtmId !== 'GTM-XXXXXXX') {
       const gtmScript = document.createElement('script');
       gtmScript.innerHTML = `
         (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
@@ -28,44 +28,50 @@ export function Analytics({ gtmId, fbPixelId, clarityId }: AnalyticsProps) {
       console.log('✅ Google Tag Manager loaded:', gtmId);
     }
 
-    // Facebook Pixel
-    if (fbPixelId && fbPixelId !== '1309070321027945') {
-      // @ts-ignore
-      !function(f,b,e,v,n,t,s)
-      {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-      n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-      if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-      n.queue=[];t=b.createElement(e);t.async=!0;
-      t.src=v;s=b.getElementsByTagName(e)[0];
-      s.parentNode.insertBefore(t,s)}(window, document,'script',
-      'https://connect.facebook.net/en_US/fbevents.js');
-      
-      // @ts-ignore
-      window.fbq('init', fbPixelId);
-      // @ts-ignore
-      window.fbq('track', 'PageView');
+  
+// ===================== Facebook Pixel =====================
+if (fbPixelId && !document.getElementById('fb-pixel-script')) {
+  const fbScript = document.createElement('script');
+  fbScript.id = 'fb-pixel-script';
+  fbScript.async = true;
+  fbScript.src = 'https://connect.facebook.net/en_US/fbevents.js';
+  document.head.appendChild(fbScript);
 
-      // Add noscript pixel
-      const img = document.createElement('img');
-      img.height = 1;
-      img.width = 1;
-      img.style.display = 'none';
-      img.src = `https://www.facebook.com/tr?id=${fbPixelId}&ev=PageView&noscript=1`;
-      const noscript = document.createElement('noscript');
-      noscript.appendChild(img);
-      document.body.appendChild(noscript);
+  // هنا بنستنى السكربت يكمّل تحميله
+  fbScript.onload = () => {
+    const w = window as any;
 
-      console.log('✅ Facebook Pixel loaded:', fbPixelId);
+    if (!w.fbq) {
+      w.fbq = function () {
+        w.fbq.callMethod
+          ? w.fbq.callMethod.apply(w.fbq, arguments)
+          : w.fbq.queue.push(arguments);
+      };
+      w.fbq.push = w.fbq;
+      w.fbq.loaded = true;
+      w.fbq.version = '2.0';
+      w.fbq.queue = [];
     }
 
+    // تهيئة Pixel بعد تحميل السكربت
+    w.fbq('init', fbPixelId);
+    w.fbq('track', 'PageView');
+
+    console.log('✅ Facebook Pixel loaded:', fbPixelId);
+  };
+}
+
     // Microsoft Clarity
-      `;<script type="text/javascript">
-    (function(c,l,a,r,i,t,y){
-        c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
-        t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
-        y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
-    })(window, document, "clarity", "script", "uu49c2ijxd");
-</script>
+    if (clarityId && clarityId !== 'YOUR_CLARITY_ID') {
+      const clarityScript = document.createElement('script');
+      clarityScript.type = 'text/javascript';
+      clarityScript.innerHTML = `
+        (function(c,l,a,r,i,t,y){
+          c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+          t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+          y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+        })(window, document, "clarity", "script", "${clarityId}");
+      `;
       document.head.appendChild(clarityScript);
 
       console.log('✅ Microsoft Clarity loaded:', clarityId);
